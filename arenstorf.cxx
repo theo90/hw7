@@ -14,7 +14,7 @@ void max_bestimmen (double *yn2, double *yn, double &maximum);
 int main()
 {
 	double x=0.0, dx=1e-3, tol=1e-5;
-	const double L=17.065216560157;
+	const double T=17.065216560157;
 	const int dim=4;
 	double k1[dim], k2[dim], k3[dim], k4[dim], k5[dim], k6[dim], k7[dim];
 	double  y0[dim]= { 0.994, 0.0 , 0.0 , -2.00158510637908};
@@ -24,7 +24,7 @@ int main()
 	
 	
 	ofstream out("Runge_kutta.txt");
-	while(x<L)
+	while(x<T)
 	{
 		for(int i=0; i<dim; i++) y_alt[i]=y0[i];
 		RK4(k1,k2,k3, k4,k5, k6, k7,y0, x,  dx);
@@ -108,7 +108,7 @@ void RK4( double *k1, double *k2, double *k3, double *k4, double *k5, double *k6
 void RK5(double *k1, double *k2, double *k3, double *k4, double *k5, double *k6,double *k7, double *y5,  double x,  double dx)
 {
 	const int dim=4;
-	RKstep(k1, k2, k3,k4, k5, k6, k7,  y5, x,dx);
+	//RKstep(k1, k2, k3,k4, k5, k6, k7,  y5, x,dx);
 	for(int i=0; i<dim; i++)
 		y5[i]+=+dx*(5179./57600*k1[i]+7571./16695.*k3[i]+393./640.*k4[i]-92097./339200.*k5[i]+187./2100.*k6[i]+1./40.*k7[i] );
 
@@ -121,7 +121,7 @@ void max_bestimmen (double *yn2, double *yn, double &maximum)
 	for(int i=0; i<dim; i++)
 		norm[i]=abs(yn2[i]-yn[i]);
 
-    maximum=norm[0];
+	 maximum=norm[0];
 	for(int i=0; i<dim; i++)
 	{
 		if(norm[i]>maximum)
